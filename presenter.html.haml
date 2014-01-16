@@ -1,0 +1,66 @@
+!!!
+%title= title
+%head
+  %script{src:'jquery-1.10.2.min.js', type:'text/javascript'}
+  :css
+    * { margin: 0; font-family: Ubuntu, Sans-serif;}
+    html, body { height: 100%; }
+    .container {min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -4em; overflow-x:hidden;}
+    .progress-indicator {height: 3em;}
+    .slide {display:none; position:relative;}
+    .progress-indicator {background-color:#ccc; padding:1em; display:inline-block; margin:10px;}
+
+%body
+  .container
+    - slides.each do |s|
+      .slide= s
+
+  .progress-indicator
+    %span.current-slide-number= 1
+    of
+    = slides.size
+
+  :javascript
+    $(document).ready(function(){
+      var slides = $(".slide");
+
+      var current_slide_index = 0;
+
+      var previous = function(){
+        if (current_slide_index === 0) return false;
+        show(--current_slide_index, function(slide){
+          slide.css('left', -100);
+          slide.animate({
+            left: parseInt(slide.css('left'), 10) == 0 ?  -slide.outerWidth() : 0
+          });
+        });
+      };
+
+      var next = function(){
+        if (current_slide_index === (slides.length - 1)) return false;
+        show(++current_slide_index, function(slide){
+          slide.css('left', 100);
+          slide.animate({
+            left: parseInt(slide.css('left'), 10) == 0 ?  +slide.outerWidth() : 0
+          });
+        });
+      };
+
+      var show = function(index, animation){
+        slides.hide();
+        var slide = slides.eq(index);
+        slide.show();
+        animation(slide);
+        $(".current-slide-number").text(index + 1);
+      };
+
+      $(document).keydown(function(e){
+        if (e.keyCode == 37) { previous(); return false;}
+        else if (e.keyCode == 39){ next(); return false;}
+        return true;
+      });
+      
+      show(0);
+      $(".progress-indicator").css({ 'opacity' : 0.7 });
+    });
+
