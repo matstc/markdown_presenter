@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'simple_presenter'
+
+process ARGV[0]

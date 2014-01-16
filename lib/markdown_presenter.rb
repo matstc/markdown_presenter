@@ -4,9 +4,11 @@ require 'haml'
 require 'kramdown'
 
 def present title, content
-  template = File.read('presenter.html.haml')
+  template = File.read(File.join(File.dirname(__FILE__), "../presenter.html.haml"))
   haml_engine = Haml::Engine.new(template)
-  haml_engine.render(Object.new, {slides: content.split(/(?=<h1)/), title: title})
+  haml_engine.render(Object.new, {slides: content.split(/(?=<h1)/), title: title}) do |filename|
+    File.read File.join(File.dirname(__FILE__), "../", filename)
+  end
 end
 
 def content_of filename
