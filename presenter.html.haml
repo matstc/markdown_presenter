@@ -40,7 +40,8 @@
     $(document).ready(function(){
       var slides = $(".slide");
 
-      var current_slide_index = 0;
+      var match = location.href.match(/#(.*)$/);
+      var current_slide_index = (match && (parseInt(match[1], 10) - 1)) || 0;
 
       var previous = function(){
         if (current_slide_index === 0) return false;
@@ -66,8 +67,11 @@
         slides.hide();
         var slide = slides.eq(index);
         slide.show();
-        if (animation) animation(slide);
+
         $(".current-slide-number").text(index + 1);
+        location.href = location.href.replace(/#.*|$/, '#' + (index + 1));
+
+        if (animation) animation(slide);
       };
 
       $(document).keydown(function(e){
@@ -76,7 +80,7 @@
         return true;
       });
       
-      show(0);
+      show(current_slide_index);
 
       P = {previous:previous, next:next};
 
