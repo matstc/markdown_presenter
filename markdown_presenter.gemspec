@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'markdown_presenter'
   s.homepage    = 'https://github.com/matstc/markdown_presenter'
-  s.version     = '0.4.0'
+  s.version     = '0.4.1'
   s.date        = '2014-01-16'
   s.summary     = "Transforms a markdown file into an HTML presentation"
   s.description = "Transforms a markdown file into an HTML presentation"
