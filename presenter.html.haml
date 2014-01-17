@@ -42,13 +42,16 @@
     :javascript
       var init = function(){
         var slides = $(".slide");
+        var current_slide_index = 0;
 
-        var match = location.href.match(/#(.*)$/);
-        var current_slide_index = (match && (parseInt(match[1], 10) - 1)) || 0;
+        var parseCurrentSlideIndex = function(){
+          var match = location.href.match(/#(.*)$/);
+          return (match && (parseInt(match[1], 10) - 1)) || 0;
+        };
 
         var previous = function(){
           if (current_slide_index === 0) return false;
-          show(--current_slide_index, function(slide){
+          show(current_slide_index - 1, function(slide){
             slide.css('left', -100);
             slide.animate({
               left: parseInt(slide.css('left'), 10) == 0 ?  -slide.outerWidth() : 0
@@ -58,7 +61,7 @@
 
         var next = function(){
           if (current_slide_index === (slides.length - 1)) return false;
-          show(++current_slide_index, function(slide){
+          show(current_slide_index + 1, function(slide){
             slide.css('left', 100);
             slide.animate({
               left: parseInt(slide.css('left'), 10) == 0 ?  +slide.outerWidth() : 0
@@ -67,12 +70,13 @@
         };
 
         var show = function(index, animation){
+          current_slide_index = index || parseCurrentSlideIndex();
           slides.hide();
-          var slide = slides.eq(index);
+          var slide = slides.eq(current_slide_index);
           slide.show();
 
-          $(".current-slide-number").text(index + 1);
-          location.href = location.href.replace(/#.*|$/, '#' + (index + 1));
+          $(".current-slide-number").text(current_slide_index + 1);
+          location.href = location.href.replace(/#.*|$/, '#' + (current_slide_index + 1));
 
           if (animation) animation(slide);
         };
@@ -83,9 +87,14 @@
           return true;
         });
         
-        show(current_slide_index);
+        show();
 
         P = {previous:previous, next:next};
+
+        $(window).on('hashchange', function(){
+          var parsedIndex = parseCurrentSlideIndex();
+          if(parsedIndex !== current_slide_index){ show(parsedIndex); }
+        });
 
         var progress_indicator = $(".progress-indicator");
         progress_indicator.css({ 'opacity' : 0.6 });
@@ -98,5 +107,3 @@
       };
 
       $(document).ready(init);
-      $(window).on('hashchange', init);
-
