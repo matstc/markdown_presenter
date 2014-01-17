@@ -1,96 +1,97 @@
 !!!
-%head
-  %title= title
-  %script{type:'text/javascript'}= yield 'js/jquery-1.10.2.min.js'
-  %style= yield 'css/uikit.almost-flat.min.css'
-  %script{type:'text/javascript'}= yield 'js/uikit.min.js'
-  %meta{name:"viewport", content:"width=device-width, user-scalable=no"}
+%html
+  %head
+    %title= title
+    %script{type:'text/javascript'}= yield 'js/jquery-1.10.2.min.js'
+    %style= yield 'css/uikit.almost-flat.min.css'
+    %script{type:'text/javascript'}= yield 'js/uikit.min.js'
+    %meta{name:"viewport", content:"width=device-width, user-scalable=no"}
 
-  :css
-    * { margin: 0; font-family: Ubuntu, Sans-serif;}
-    html, body { height: 100%; }
-    .topbar {height: 4em; text-align:right;}
-    .slide {display:none; position:relative; padding:5px; margin-top:3em; font-size:140%; line-height:1.5em;}
-    .progress-indicator {display:inline-block; margin: 10px 10px 10px auto; padding:10px; background-color:#ccc; border-radius:6px; font-size:150%;}
-    .progress-indicator a {font-weight:bold; font-size:110%; padding:0 10px;}
-    .page-status {display:inline;}
+    :css
+      * { margin: 0; font-family: Ubuntu, Sans-serif;}
+      html, body { height: 100%; }
+      .topbar {height: 4em; text-align:right;}
+      .slide {display:none; position:relative; padding:5px; margin-top:3em; font-size:140%; line-height:1.5em;}
+      .progress-indicator {display:inline-block; margin: 10px 10px 10px auto; padding:10px; background-color:#ccc; border-radius:6px; font-size:150%;}
+      .progress-indicator a {font-weight:bold; font-size:110%; padding:0 10px;}
+      .page-status {display:inline;}
 
-%body
-  .topbar
-    .progress-indicator
-      %a{href: "#previous", onclick:'P.previous(); return false;'}
-        ←
-      .page-status
-        %span.current-slide-number= 1
-        of
-        = slides.size
-      %a{href: "#next", onclick:'P.next(); return false;'}
-        →
+  %body
+    .topbar
+      .progress-indicator
+        %a{href: "#previous", onclick:'P.previous(); return false;'}
+          ←
+        .page-status
+          %span.current-slide-number= 1
+          of
+          = slides.size
+        %a{href: "#next", onclick:'P.next(); return false;'}
+          →
 
-  .uk-grid
-    .uk-width-large-1-4
-      &#160;
-    .uk-width-large-2-4
-      - slides.each do |s|
-        .slide= s
-    .uk-width-large-1-4
-      &#160;
+    .uk-grid
+      .uk-width-large-1-4
+        &#160;
+      .uk-width-large-2-4
+        - slides.each do |s|
+          .slide= s
+      .uk-width-large-1-4
+        &#160;
 
-  :javascript
-    $(document).ready(function(){
-      var slides = $(".slide");
+    :javascript
+      $(document).ready(function(){
+        var slides = $(".slide");
 
-      var match = location.href.match(/#(.*)$/);
-      var current_slide_index = (match && (parseInt(match[1], 10) - 1)) || 0;
+        var match = location.href.match(/#(.*)$/);
+        var current_slide_index = (match && (parseInt(match[1], 10) - 1)) || 0;
 
-      var previous = function(){
-        if (current_slide_index === 0) return false;
-        show(--current_slide_index, function(slide){
-          slide.css('left', -100);
-          slide.animate({
-            left: parseInt(slide.css('left'), 10) == 0 ?  -slide.outerWidth() : 0
+        var previous = function(){
+          if (current_slide_index === 0) return false;
+          show(--current_slide_index, function(slide){
+            slide.css('left', -100);
+            slide.animate({
+              left: parseInt(slide.css('left'), 10) == 0 ?  -slide.outerWidth() : 0
+            });
           });
-        });
-      };
+        };
 
-      var next = function(){
-        if (current_slide_index === (slides.length - 1)) return false;
-        show(++current_slide_index, function(slide){
-          slide.css('left', 100);
-          slide.animate({
-            left: parseInt(slide.css('left'), 10) == 0 ?  +slide.outerWidth() : 0
+        var next = function(){
+          if (current_slide_index === (slides.length - 1)) return false;
+          show(++current_slide_index, function(slide){
+            slide.css('left', 100);
+            slide.animate({
+              left: parseInt(slide.css('left'), 10) == 0 ?  +slide.outerWidth() : 0
+            });
           });
+        };
+
+        var show = function(index, animation){
+          slides.hide();
+          var slide = slides.eq(index);
+          slide.show();
+
+          $(".current-slide-number").text(index + 1);
+          location.href = location.href.replace(/#.*|$/, '#' + (index + 1));
+
+          if (animation) animation(slide);
+        };
+
+        $(document).keydown(function(e){
+          if (e.keyCode == 37) { previous(); return false;}
+          else if (e.keyCode == 39){ next(); return false;}
+          return true;
         });
-      };
+        
+        show(current_slide_index);
 
-      var show = function(index, animation){
-        slides.hide();
-        var slide = slides.eq(index);
-        slide.show();
+        P = {previous:previous, next:next};
 
-        $(".current-slide-number").text(index + 1);
-        location.href = location.href.replace(/#.*|$/, '#' + (index + 1));
+        var progress_indicator = $(".progress-indicator");
+        progress_indicator.css({ 'opacity' : 0.6 });
 
-        if (animation) animation(slide);
-      };
-
-      $(document).keydown(function(e){
-        if (e.keyCode == 37) { previous(); return false;}
-        else if (e.keyCode == 39){ next(); return false;}
-        return true;
+        progress_indicator.hover(function(){
+          $(this).css({'opacity' : 1});
+        }, function(){
+          $(this).css({'opacity' : 0.6});
+        });
       });
-      
-      show(current_slide_index);
-
-      P = {previous:previous, next:next};
-
-      var progress_indicator = $(".progress-indicator");
-      progress_indicator.css({ 'opacity' : 0.6 });
-
-      progress_indicator.hover(function(){
-        $(this).css({'opacity' : 1});
-      }, function(){
-        $(this).css({'opacity' : 0.6});
-      });
-    });
 

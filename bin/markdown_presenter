@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
-require 'simple_presenter'
+require 'markdown_presenter'
+
+(puts "You need to specify a filename."; exit 1) if ARGV.empty?
 
 process ARGV[0]
