@@ -40,7 +40,7 @@
         &#160;
 
     :javascript
-      $(document).ready(function(){
+      var init = function(){
         var slides = $(".slide");
 
         var match = location.href.match(/#(.*)$/);
@@ -95,5 +95,8 @@
         }, function(){
           $(this).css({'opacity' : 0.6});
         });
-      });
+      };
+
+      $(document).ready(init);
+      $(window).on('hashchange', init);
 
