@@ -1,4 +1,4 @@
-VERSION = '0.4.2'
+VERSION = '0.5.0'
 
 Gem::Specification.new do |s|
   s.name        = 'markdown_presenter'
