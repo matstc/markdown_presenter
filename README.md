@@ -15,4 +15,4 @@ You __don't have to write any mark-up__ or do anything special to create slides.
 
 Slides are automatically delimited by top-level headers (`h1` tags).
 
-See the [presentation example](example.html).
+See the [presentation example](http://matstc.github.io/example.html).
