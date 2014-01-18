@@ -3,7 +3,7 @@ load 'markdown_presenter.gemspec'
 
 puts `gem build markdown_presenter.gemspec`
 puts `gem install markdown_presenter-#{VERSION}.gem`
-puts `echo '# Header\n\nContent' > /tmp/test.md`
+puts `echo '# Header One\n\nContent\n\n# Header Two\n\nContent too\n\n# Header Three\n\nContent tree' > /tmp/test.md`
 puts `markdown_presenter /tmp/test.md > /tmp/test.html`
 
 html = File.read('/tmp/test.html')

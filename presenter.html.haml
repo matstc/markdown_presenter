@@ -70,7 +70,7 @@
         };
 
         var show = function(index, animation){
-          current_slide_index = index || parseCurrentSlideIndex();
+          current_slide_index = index;
           slides.hide();
           var slide = slides.eq(current_slide_index);
           slide.show();
@@ -87,7 +87,7 @@
           return true;
         });
         
-        show();
+        show(parseCurrentSlideIndex());
 
         P = {previous:previous, next:next};
 
