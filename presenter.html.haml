@@ -7,6 +7,7 @@
     %style= yield 'css/uikit.almost-flat.min.css'
     %script{type:'text/javascript'}= yield 'js/uikit.min.js'
     %link{href:'http://fonts.googleapis.com/css?family=Luckiest+Guy', rel:'stylesheet', type:'text/css'}
+    %link{href:'http://fonts.googleapis.com/css?family=Ubuntu', rel:'stylesheet', type:'text/css'}
 
     :css
       *, html, body { margin: 0; font-family: Ubuntu, Sans-serif;}
@@ -20,7 +21,8 @@
       code {font-size: 16px;}
       h1 {margin-bottom:25px; font-family: 'Luckiest Guy', Ubuntu;}
       h1 {border-bottom:1px dotted green;}
-      h2 {margin-top:75px; background-color: #ded; padding:5px;}
+      h2 {margin-top:75px; background-color: #ddd; padding:1px 5px;}
+      h2, h3, h4, h5, h6 {font-family: Ubuntu, Verdana;}
 
   %body
     .topbar
