@@ -13,7 +13,8 @@ end
 
 def content_of filename
   if filename.end_with? ".md"
-    Kramdown::Document.new(File.read(filename)).to_html
+    document = Kramdown::Document.new(File.read(filename), parse_block_html: true, parse_span_html: true)
+    document.to_html
 
   elsif filename.end_with? ".html"
     require 'nokogiri'
