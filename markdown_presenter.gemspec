@@ -1,4 +1,4 @@
-VERSION = '0.5.7'
+VERSION = '0.6.0'
 
 Gem::Specification.new do |s|
   s.name        = 'markdown_presenter'
@@ -21,6 +21,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "haml"
   s.add_runtime_dependency "kramdown"
   s.add_runtime_dependency "nokogiri"
-  s.add_runtime_dependency "open-uri"
   s.add_runtime_dependency "mime-types"
 end
