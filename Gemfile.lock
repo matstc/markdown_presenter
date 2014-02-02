@@ -1,3 +1,11 @@
+PATH
+  remote: .
+  specs:
+    markdown_presenter (0.5.7)
+      haml
+      kramdown
+      nokogiri
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -13,6 +21,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  haml
-  kramdown
-  nokogiri
+  markdown_presenter!

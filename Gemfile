@@ -2,6 +2,4 @@ source 'http://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'haml'
-gem 'kramdown'
-gem 'nokogiri'
+gemspec

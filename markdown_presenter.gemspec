@@ -17,4 +17,10 @@ Gem::Specification.new do |s|
                   ]
   s.license     = 'CC BY-NC 4.0'
   s.executables << "markdown_presenter"
+
+  s.add_runtime_dependency "haml"
+  s.add_runtime_dependency "kramdown"
+  s.add_runtime_dependency "nokogiri"
+  s.add_runtime_dependency "open-uri"
+  s.add_runtime_dependency "mime-types"
 end
