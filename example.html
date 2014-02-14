@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>example.md</title>
-    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <meta content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1' name='viewport'>
     <script type='text/javascript'>
       /*! jQuery v1.10.2 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
       //@ sourceMappingURL=jquery-1.10.2.min.map
@@ -144,11 +144,9 @@
           return true;
         });
       
-        slides.each(function(_, elem){
-          var hammertime = Hammer(elem);
-          hammertime.on("swipeleft", next);
-          hammertime.on("swiperight", previous);
-        });
+        var hammertime = Hammer(document.body, {swipe_velocity: 0.3, drag: false});
+        hammertime.on("swipeleft", next);
+        hammertime.on("swiperight", previous);
         
         show(parseCurrentSlideIndex());
       

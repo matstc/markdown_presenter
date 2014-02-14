@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    markdown_presenter (0.7.0)
+    markdown_presenter (0.7.2)
       haml
       kramdown
       mime-types
