@@ -6,6 +6,7 @@
     %script{type:'text/javascript'}= yield 'js/jquery-1.10.2.min.js'
     %style= yield 'css/uikit.almost-flat.min.css'
     %script{type:'text/javascript'}= yield 'js/uikit.min.js'
+    %script{type:'text/javascript'}= yield 'js/hammer.min.js'
     %link{href:'http://fonts.googleapis.com/css?family=Luckiest+Guy', rel:'stylesheet', type:'text/css'}
     %link{href:'http://fonts.googleapis.com/css?family=Ubuntu', rel:'stylesheet', type:'text/css'}
 
@@ -91,6 +92,12 @@
           if (e.keyCode == 37) { previous(); return false;}
           else if (e.keyCode == 39){ next(); return false;}
           return true;
+        });
+
+        slides.each(function(_, elem){
+          var hammertime = Hammer(elem);
+          hammertime.on("swipeleft", next);
+          hammertime.on("swiperight", previous);
         });
         
         show(parseCurrentSlideIndex());
