@@ -1,4 +1,4 @@
-VERSION = '0.7.0'
+VERSION = '0.7.2'
 
 Gem::Specification.new do |s|
   s.name        = 'markdown_presenter'
@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.files       = ["lib/markdown_presenter.rb",
                    "css/uikit.almost-flat.min.css",
                    "js/uikit.min.js",
+                   "js/hammer.min.js",
                    "js/jquery-1.10.2.min.js",
                    "presenter.html.haml"
                   ]
