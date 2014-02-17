@@ -1,4 +1,6 @@
 language: ruby
 rvm:
   - 2.0.0
-script: ruby test/markdown_presenter_test.rb && ruby test.rb
+script: 
+  - ruby test/markdown_presenter_test.rb 
+  - ruby test.rb
