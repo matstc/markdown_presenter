@@ -1,3 +1,5 @@
+![](https://travis-ci.org/matstc/markdown_presenter.png)
+
 Transforms a markdown file into an HTML presentation.
 
 # Install
