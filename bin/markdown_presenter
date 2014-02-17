@@ -3,4 +3,4 @@ require 'markdown_presenter'
 
 (puts "You need to specify a filename."; exit 1) if ARGV.empty?
 
-process ARGV[0]
+MarkdownPresenter::process ARGV[0]

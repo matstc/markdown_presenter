@@ -1,4 +1,4 @@
-VERSION = '0.7.2'
+VERSION = '0.7.3'
 
 Gem::Specification.new do |s|
   s.name        = 'markdown_presenter'
@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
                    "js/jquery-1.10.2.min.js",
                    "presenter.html.haml"
                   ]
+  s.test_files  = Dir.glob('test/*_test.rb')
   s.license     = 'CC BY-NC 4.0'
   s.executables << "markdown_presenter"
 
