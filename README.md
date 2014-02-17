@@ -1,4 +1,4 @@
-![](https://travis-ci.org/matstc/markdown_presenter.png)
+[![Build Status](https://travis-ci.org/matstc/markdown_presenter.png?branch=master)](https://travis-ci.org/matstc/markdown_presenter)
 
 Transforms a markdown file into an HTML presentation.
 
